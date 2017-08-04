@@ -1,0 +1,43 @@
+﻿<link rel="stylesheet" type="text/css" href="/css/modal/users.css"/> 
+<form class="form-horizontal" role="form" ng-submit="submitUsers()" name="usersForm">
+    <div class="modal-header">
+        <h3 class="modal-title">{{user.id ? 'Edit ' + user.fullName : 'Add new user' }}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-md-3 control-label">Name</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" ng-model="user.fullName" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Type</label>
+            <div class="col-md-6">
+                <select class="form-control" ng-model="user.access" ng-options="type for type in accessTypes" required="">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Email</label>
+            <div class="col-md-6">
+                <input type="email" class="form-control" ng-model="user.email" required>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    todo have rights
+                    <joggings custom-user-id="{{user.id}}" 
+                              custom-numer-of-entries="5"
+                              ng-if="user.id"></joggings>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger pull-left" type="button" ng-if="user.id" ng-click="suspendUser()">Suspend</button>
+        <button class="btn pull-left" type="button" ng-if="user.id" ng-click="resetPassword()">Reset password</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" type="submit">{{user.id ? 'Save' : 'Add user' }}</button>
+    </div>
+</form>

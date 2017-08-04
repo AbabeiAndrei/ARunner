@@ -1,0 +1,14 @@
+﻿{
+  "connectionString": "Server=localhost;Database=arunner;Uid=arunner;Pwd=arunner;SslMode=none;",
+  "MailServerSettings": {
+    "FromName": "ARunner",
+    "FromAddress": "ababeiandrei@outlook.com",
+    "Host": "smtp-mail.outlook.com",
+    "Port": "587 ",
+    "UseSsl": "true",
+    "UserName": "ababeiandrei@outlook.com",
+    "Password": "Mcncc.comh112?"
+  },
+  "appHost": "http://localhost:13900/",
+  "SendGridKey": "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"
+}

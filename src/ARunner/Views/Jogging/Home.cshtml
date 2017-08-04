@@ -1,0 +1,10 @@
+﻿@using ARunner.Settings
+@{
+    ViewBag.Title = Settings.APPLICATION_NAME;
+}
+
+<div ng-controller="homeController">
+    <dashboard ng-if="$parent.show == 1"></dashboard>
+    <joggings ng-if="$parent.show == 2"></joggings>
+    <users ng-if="$parent.show == 3"></users>
+</div>

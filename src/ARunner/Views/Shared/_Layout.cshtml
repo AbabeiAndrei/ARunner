@@ -1,0 +1,75 @@
+﻿@using ARunner.Settings
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/libs/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/libs/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+    <script src="~/libs/angular/angular.min.js"></script>
+    <script src="~/libs/angular-ui/build/angular-ui.min.js"></script>
+    <script src="~/libs/jquery/dist/jquery.min.js"></script>
+    <script src="~/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/libs/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="~/libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/libs/moment/min/moment.min.js"></script>
+    <script src="~/libs/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://rawgit.com/atais/angular-eonasdan-datetimepicker/0.3.8/dist/angular-eonasdan-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <script src="~/app/app.js"></script>
+</head>
+<body ng-app="jgApp" ng-controller="layoutController">
+@*<div ng-if="showLoader">
+    <div id="loader" ng-show="loading">
+        <img src="~/resources/loader.gif" alt="loading" />
+        <span>Loading</span>
+    </div>
+</div>*@
+ 
+<div id="@(User.Identity.IsAuthenticated ? "wrapper" : "")">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        @Settings.APPLICATION_NAME
+                    </a>
+                </li>
+                <li>
+                    <a href ng-click="setShow(1)" class="active">Dashboard</a>
+                </li>
+                <li>
+                    <a href ng-click="setShow(2)">Joggings</a>
+                </li>
+                <li>
+                    <a href ng-click="setShow(3) ng-if='showUsers'">Users</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row user-header">
+            <div class="col-lg-12">
+                You are logged as @User.Identity.Name
+                <span class="pull-right">
+                    <a href="/Account/Logout">LogOut</a>
+                </span>
+            </div>
+        </div>
+    }
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

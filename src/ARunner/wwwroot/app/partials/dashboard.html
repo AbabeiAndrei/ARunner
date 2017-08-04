@@ -1,0 +1,18 @@
+﻿<link type="text/css" rel="stylesheet" href="/css/home/dashboard.css"></link>
+<div>
+    <div class="container" ng-controller="dashboardController">
+        <div ng-show="statistics">
+            <h1>Your statistics over this week ({{statistics.thisWeek.startWeek | date:'MM/dd'}} - {{statistics.thisWeek.endWeek | date:'MM/dd'}})</h1>
+            <h2>This week you run a total of {{statistics.thisWeek.run | distanceUnit}} ({{statistics.thisWeek.time | time}})</h2>
+            <h3>With an average speed of {{statistics.thisWeek.average | speedUnit}}</h3>
+            <h3>
+                Last week you run {{statistics.lastWeek.run | distanceUnit}} (
+                <span style="color: {{diferenceColor}}">
+                    {{calculateDiference(statistics.thisWeek.run, statistics.lastWeek.run)}}
+                </span>
+                )
+            </h3>
+            <div id="chartContainer" style="height: 300px; width: 100%;" ng-show ="chartOptions"></div>
+        </div>
+    </div>
+</div>

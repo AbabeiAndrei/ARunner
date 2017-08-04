@@ -1,0 +1,10 @@
+
+\.vs/ARunner/v14/
+
+\.vs/restore\.dg
+
+src/ARunner/bin/Debug/
+
+src/ARunner\.BusinessLogic/bin/Debug/
+
+src/ARunner\.DataLayer/bin/Debug/

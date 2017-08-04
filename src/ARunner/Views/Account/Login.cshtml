@@ -1,0 +1,37 @@
+﻿@model ARunner.BusinessLogic.Models.LoginViewModel
+@using ARunner.Settings
+@{
+    ViewBag.Title = Settings.APPLICATION_NAME;
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" type="text/css" href="~/libs/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="~/css/account/style.css" />
+
+<div class="container" ng-controller="loginController">
+    <div class="row">
+        <div class="col-md-6 col-lg-offset-3" >
+            <form class="form-signin">
+                <h2 class="form-signin-heading">Please login</h2>
+                <p class="input-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" ng-model="loginModel.email" style="width: 283px" required />
+                </p>
+                <p class="input-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" ng-model="loginModel.password" required />
+                </p>
+
+                <label class="checkbox">
+                    <input type="checkbox" ng-model="loginModel.rememberMe"> Remember me
+                </label>
+
+                <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="login()">Login</button>
+                
+                <div style="padding-top: 30px">
+                    <a ng-href="/Account/Register">Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

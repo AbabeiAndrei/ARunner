@@ -1,0 +1,124 @@
+﻿<link type="text/css" rel="stylesheet" href="/css/home/joggings.css"/>
+<div>
+    <div class="container" ng-controller="joggingController">
+        <div class="row">
+            <button class="btn btn-default btn-lg btn-primary"
+                    generic-modal="joggingModal"
+                    generic-modal-success="refresh()">
+                Add new session
+            </button>
+        </div>
+        <div class="row">
+            <div class="panel panel-primary filterable">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Joggin sessions</h3>
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-xs" ng-show="!showFilter" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                        <button class="btn btn-default btn-xs" ng-click="toggleFilter()"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr ng-show="showFilter">
+                            <td colspan="3">
+                                <div class="filters">
+                                    <label>From</label>
+                                    <p class="input-group">
+                                        <input type="datetime" class="form-control"
+                                               ng-model="filterFrom"
+                                               is-open="isDtpFromOpen"
+                                               datepicker-options="dateOptions"
+                                               close-text="Close"
+                                               uib-datepicker-popup="MM/dd/yyyy"
+                                               required>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="toggleDtp(1)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                    <label style="padding-left: 16px">To</label>
+                                    <p class="input-group">
+                                        <input type="datetime" class="form-control"
+                                               ng-model="filterTo"
+                                               is-open="isDtpToOpen"
+                                               datepicker-options="dateOptions"
+                                               close-text="Close"
+                                               uib-datepicker-popup="MM/dd/yyyy"
+                                               required>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="toggleDtp(2)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                    <div class="user-selector">
+                                        <label style="padding-left: 16px">User</label>
+                                        <p class="input-group">
+                                            <input type="text" ng-model="selectedUser"
+                                                   uib-typeahead="user as user.fullName for user in getUsers($viewValue)"
+                                                   typeahead-loading="loadingUsers"
+                                                   typeahead-no-results="noResults"
+                                                   class="form-control">
+                                            <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh">Loading...</i>
+                                            <div ng-show="noResults">
+                                                <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                            </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    <button class="btn btn-primary" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>Distance</th>
+                            <th>Time</th>
+                            <th>Avg. speed</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="data.items.length <= 0">
+                            <td colspan="3">
+                                <i>No data to show</i>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="item in data.items">
+                            <td>{{item.created | dateTimeCustom}}</td>
+                            <td>{{item.distance | distanceUnit}}</td>
+                            <td>{{item.time | time}}</td>
+                            <td>{{item.average | speedUnit}}</td>
+                            <td>
+                                <div class="pull-right">
+                                    <button class="btn btn-link btn-xs"
+                                            generic-modal="joggingModal"
+                                            generic-modal-success="refresh()"
+                                            generic-modal-data="item">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    </button>
+                                    <button class="btn btn-link btn-xs" ng-click="remove(item)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="center-block" ng-show="data.pages.length > 1">
+                <ul class="pagination">
+                    <li class="{{activePage <= 0 ? 'disabled' : ''}}">
+                        <a href ng-click="selectPage(activePage-1)"><</a>
+                    </li>
+                    <li ng-repeat="page in data.pages" class="{{pageIsActive(page)}}">
+                        <a href ng-click="selectPage(page)">{{page + 1}}</a>
+                    </li>
+                    <li class="{{activePage >= data.pages.length - 1 ? 'disabled' : ''}}">
+                        <a href ng-click="selectPage(activePage+1)">></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
